@@ -4,7 +4,7 @@ import Bank from "../src/bank";
 const bank = new Bank();
 const account = bank.createAccount("John Doe", 29, "2938298");
 
-//scenario 1: sucessfully create account
+//scenario 1: successful account creation
 if(account.accountNumber === "2938298") {
     console.log("Scenario 1 passed");
 }
@@ -21,7 +21,7 @@ catch(_) {
     console.log("Scenario 2 passed");
 }
 
-// scenario 3: sucessful deposit
+// scenario 3: successful deposit
 try {
   bank.deposit(100, "2938298");
   console.log("Scenario 3 passed");
@@ -43,4 +43,29 @@ try {
   console.log("Scenario 5 failed");
 } catch (_) {
   console.log("Scenario 5 passed");
+}
+
+// scenario 6: successfully withdraw
+try {
+  bank.withdraw(10, '2938298');
+  console.log("Scenario 6 passed");
+} catch (error) {
+  console.log("Scenario 6 failed");
+}
+
+// scenario 7: Attempt to withdraw money with insufficient funds
+try {
+  bank.withdraw(999, '2938298');
+  console.log("Scenario 7 failed");
+} catch (error) {
+  console.log("Scenario 7 passed");
+}
+
+
+// scenario 8: Attempt to withdraw invalid amount
+try {
+  bank.withdraw(-5, '2938298');
+  console.log("Scenario 8 failed");
+} catch (error) {
+  console.log("Scenario 8 passed");
 }
