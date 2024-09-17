@@ -31,7 +31,7 @@ export default class Bank {
    */
   public createAccount(name: string, age: number, accountNumber: string): BankAccount {
       const isAccExists = this.findAccount(accountNumber);
-      if(isAccExists) {
+      if (isAccExists) {
           throw new Error("Account already exists");
       }
       const account: BankAccount = {
@@ -43,4 +43,22 @@ export default class Bank {
       this.accounts.push(account);
       return account;
   }
+
+  /**
+   * deposits money given an amount and account number
+   * @param depositAmount -- amount of money to deposit
+   * @param accountNumber -- account number
+   */
+  public deposit(depositAmount: number, accountNumber: string): void {
+    if (depositAmount <= 0) {
+        throw new Error('Deposit must be greater than zero');
+    }
+    const account = this.findAccount(accountNumber);
+    if (!account) {
+        throw new Error("Account does not exist");
+    }
+
+    account.balance += depositAmount;
+  }
 }
+
